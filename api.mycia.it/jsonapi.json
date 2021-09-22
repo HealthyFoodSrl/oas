@@ -220,6 +220,11 @@
                                 "description": "The restaurant id.",
                                 "example": 6418
                             },
+                            "token": {
+                                "type": "string",
+                                "description": "The restaurant token.",
+                                "example": "a1b2c3d4e"
+                            },
                             "action": {
                                 "type": "string",
                                 "description": "The action made by the actor on the device.",
@@ -233,6 +238,7 @@
                 },
                 "required": [
                     "ris_id",
+                    "token",
                     "type",
                     "attributes"
                 ]
