@@ -1,0 +1,267 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "api.mycia.it",
+        "description": "This page contains the documentation on how to use MyCia through shared API calls.\n\n > Note: this spec is based on [jsonapi format v1.1](https://jsonapi.org/format/1.1/) and each request, response and structure SHALL conform to the standard.",
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://api.mycia.it",
+            "description": "Base url"
+        }
+    ],
+    "paths": {
+        "/v1/logs/app": {
+            "post": {
+                "tags": [
+                    "Logs"
+                ],
+                "summary": "Store an AppLog",
+                "operationId": "storeAppLog",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/AppLog"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/v1/logs/web": {
+            "post": {
+                "tags": [
+                    "Logs"
+                ],
+                "summary": "Store a WebLog",
+                "operationId": "storeWebLog",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/WebLog"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        },
+        "/v1/logs/webapp": {
+            "post": {
+                "tags": [
+                    "Logs"
+                ],
+                "summary": "Store a WebappLog",
+                "operationId": "storeWebappLog",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/WebappLog"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "AppLog": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "default": "applog",
+                        "example": "applog"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "type": "string",
+                                "description": "The action made by the actor on the device.",
+                                "example": "drinkview"
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/payload"
+                            },
+                            "user_id": {
+                                "type": "string",
+                                "description": "[optional] The actor user id if present.",
+                                "example": 1,
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "WebLog": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "default": "weblog",
+                        "example": "weblog"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "action": {
+                                "type": "string",
+                                "description": "The action made by the actor on the device.",
+                                "example": "drinkview"
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/payload"
+                            },
+                            "user_id": {
+                                "type": "string",
+                                "description": "[optional] The actor user id if present.",
+                                "example": 1,
+                                "nullable": true
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "WebappLog": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "default": "webapplog",
+                        "example": "webapplog"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "ris_id": {
+                                "type": "integer",
+                                "description": "The restaurant id.",
+                                "example": 6418
+                            },
+                            "action": {
+                                "type": "string",
+                                "description": "The action made by the actor on the device.",
+                                "example": "drinkview"
+                            },
+                            "payload": {
+                                "$ref": "#/components/schemas/payload"
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "ris_id",
+                    "type",
+                    "attributes"
+                ]
+            },
+            "payload": {
+                "type": "object",
+                "description": "This is the main analytical structure. All fields are required; in case of empty values MUST be set to the default empty data type.",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "description": "Action made by the actor on the system."
+                    },
+                    "attributes": {
+                        "type": "array",
+                        "description": "Specific generic attributes about the system."
+                    },
+                    "domain": {
+                        "type": "string",
+                        "description": "The main reference domain of the system."
+                    },
+                    "lang": {
+                        "type": "string",
+                        "description": "The default language of the device."
+                    },
+                    "metadata": {
+                        "type": "object",
+                        "description": "Additional data binded to the action."
+                    },
+                    "referrer": {
+                        "type": "string",
+                        "description": "The previous reference page if present."
+                    },
+                    "start": {
+                        "type": "integer",
+                        "description": "The atomic timestamp integer value of the action."
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "The actual full url of the action."
+                    },
+                    "user_agent": {
+                        "type": "string",
+                        "description": "The device User-Agent."
+                    }
+                },
+                "example": {
+                    "action": "drinkview",
+                    "attributes": [
+                        "campari"
+                    ],
+                    "domain": "http://localhost:8000",
+                    "lang": "it-IT",
+                    "metadata": {
+                        "id": "42565",
+                        "name": "coca cola"
+                    },
+                    "referrer": "",
+                    "start": 1601385664994,
+                    "url": "http://localhost:8100/r/q/6418",
+                    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36"
+                }
+            }
+        }
+    }
+}
