@@ -328,6 +328,84 @@
                 }
             }
         },
+        "/v1/networks": {
+            "get": {
+                "tags": [
+                    "Network"
+                ],
+                "summary": "Get all networks",
+                "operationId": "getNetworks",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Network"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Network"
+                ],
+                "summary": "Store a network",
+                "operationId": "storeNetwork",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/NetworkRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/NetworkResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/types": {
             "get": {
                 "tags": [
@@ -740,6 +818,77 @@
                     "label": {
                         "type": "string",
                         "example": "Sushi"
+                    }
+                }
+            },
+            "Network": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "network"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "token": {
+                                "type": "string",
+                                "example": "a1b2c3d4"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "mycia"
+                            },
+                            "description": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Lorem ipsum dolor.."
+                            }
+                        },
+                        "required": [
+                            "token",
+                            "name"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "NetworkRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "mycia"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Lorem ipsum dolor.."
+                    }
+                },
+                "required": [
+                    "token",
+                    "name"
+                ]
+            },
+            "NetworkResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "example": "a1b2c3d4"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "mycia"
+                    },
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Lorem ipsum dolor.."
                     }
                 }
             },
