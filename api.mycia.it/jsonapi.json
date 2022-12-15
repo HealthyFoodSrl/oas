@@ -249,6 +249,84 @@
                     }
                 }
             }
+        },
+        "/v1/lines": {
+            "get": {
+                "tags": [
+                    "Line"
+                ],
+                "summary": "Get all lines",
+                "operationId": "getLines",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Line"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Line"
+                ],
+                "summary": "Store a line",
+                "operationId": "storeLine",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/LineRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/LineResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -538,6 +616,52 @@
                     "is_primary": {
                         "type": "boolean",
                         "example": true
+                    }
+                }
+            },
+            "Line": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "line"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "example": "Sushi"
+                            }
+                        },
+                        "required": [
+                            "label"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "LineRequest": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "example": "Sushi"
+                    }
+                },
+                "required": [
+                    "label"
+                ]
+            },
+            "LineResponse": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "string",
+                        "example": "Sushi"
                     }
                 }
             },
