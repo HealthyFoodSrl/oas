@@ -94,6 +94,73 @@
                 }
             }
         },
+        "/v1/bookings/availability": {
+            "parameters": [
+                {
+                    "name": "token",
+                    "description": "The business token",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "date",
+                    "description": "The booking date",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "time",
+                    "description": "The booking time",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                },
+                {
+                    "name": "seats",
+                    "description": "The number of guests",
+                    "in": "query",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Booking"
+                ],
+                "summary": "Get booking availability",
+                "operationId": "getBookingAvailability",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BookingSlot"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/businesses": {
             "get": {
                 "tags": [
@@ -532,6 +599,23 @@
                     "type",
                     "attributes"
                 ]
+            },
+            "BookingSlot": {
+                "type": "object",
+                "properties": {
+                    "start": {
+                        "type": "string",
+                        "example": "20:00"
+                    },
+                    "end": {
+                        "type": "string",
+                        "example": "20:15"
+                    },
+                    "reserved": {
+                        "type": "boolean",
+                        "example": false
+                    }
+                }
             },
             "BookingRequest": {
                 "type": "object",
