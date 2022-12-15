@@ -239,6 +239,159 @@
                 }
             }
         },
+        "/v1/businesses/{business}/bindLine": {
+            "parameters": [
+                {
+                    "name": "business",
+                    "description": "The business id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Bind a line to a business",
+                "operationId": "bindBusinessLine",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BusinessLineRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/businesses/{business}/bindNetwork": {
+            "parameters": [
+                {
+                    "name": "business",
+                    "description": "The business id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Bind a network to a business",
+                "operationId": "bindBusinessNetwork",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BusinessNetworkRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/businesses/{business}/bindType": {
+            "parameters": [
+                {
+                    "name": "business",
+                    "description": "The business id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Business"
+                ],
+                "summary": "Bind a type to a business",
+                "operationId": "bindBusinessType",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BusinessTypeRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/guests": {
             "get": {
                 "tags": [
@@ -395,6 +548,57 @@
                 }
             }
         },
+        "/v1/lines/{line}/bindBusiness": {
+            "parameters": [
+                {
+                    "name": "line",
+                    "description": "The line id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Line"
+                ],
+                "summary": "Bind a business to a line",
+                "operationId": "bindLineBusiness",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/LineBusinessRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/networks": {
             "get": {
                 "tags": [
@@ -473,6 +677,57 @@
                 }
             }
         },
+        "/v1/networks/{network}/bindBusiness": {
+            "parameters": [
+                {
+                    "name": "network",
+                    "description": "The network id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Network"
+                ],
+                "summary": "Bind a network to a business",
+                "operationId": "bindNetworkBusiness",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/NetworkBusinessRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/types": {
             "get": {
                 "tags": [
@@ -537,6 +792,57 @@
                                 }
                             }
                         }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/types/{type}/bindBusiness": {
+            "parameters": [
+                {
+                    "name": "type",
+                    "description": "The type id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Type"
+                ],
+                "summary": "Bind a business to a type",
+                "operationId": "bindTypeBusiness",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/TypeBusinessRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
                     },
                     "422": {
                         "description": "Unprocessable Entity",
@@ -776,6 +1082,33 @@
                     }
                 }
             },
+            "BusinessLineRequest": {
+                "type": "object",
+                "properties": {
+                    "line_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
+            "BusinessNetworkRequest": {
+                "type": "object",
+                "properties": {
+                    "network_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
+            "BusinessTypeRequest": {
+                "type": "object",
+                "properties": {
+                    "type_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
             "Guest": {
                 "type": "object",
                 "properties": {
@@ -905,6 +1238,15 @@
                     }
                 }
             },
+            "LineBusinessRequest": {
+                "type": "object",
+                "properties": {
+                    "business_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
             "Network": {
                 "type": "object",
                 "properties": {
@@ -976,6 +1318,15 @@
                     }
                 }
             },
+            "NetworkBusinessRequest": {
+                "type": "object",
+                "properties": {
+                    "business_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
             "Type": {
                 "type": "object",
                 "properties": {
@@ -1019,6 +1370,15 @@
                     "label": {
                         "type": "string",
                         "example": "Ristorante"
+                    }
+                }
+            },
+            "TypeBusinessRequest": {
+                "type": "object",
+                "properties": {
+                    "business_id": {
+                        "type": "integer",
+                        "example": 1
                     }
                 }
             },
