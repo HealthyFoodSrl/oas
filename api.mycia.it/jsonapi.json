@@ -171,6 +171,84 @@
                     }
                 }
             }
+        },
+        "/v1/guests": {
+            "get": {
+                "tags": [
+                    "Guest"
+                ],
+                "summary": "Get all guests",
+                "operationId": "getGuests",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Guest"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Guest"
+                ],
+                "summary": "Store a guest",
+                "operationId": "storeGuest",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/GuestRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/GuestResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -377,6 +455,89 @@
                         "type": "string",
                         "nullable": true,
                         "example": "Lorem ipsum dolor est.."
+                    }
+                }
+            },
+            "Guest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "guest"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Arturo Covitti"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393411234124"
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "is_primary": {
+                                "type": "boolean",
+                                "example": true
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "phone",
+                            "livemode",
+                            "is_primary"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "GuestRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Arturo Covitti"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393411234124"
+                    },
+                    "is_primary": {
+                        "type": "boolean",
+                        "example": true
+                    }
+                },
+                "required": [
+                    "name",
+                    "phone",
+                    "is_primary"
+                ]
+            },
+            "GuestResponse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Arturo Covitti"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393411234124"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "is_primary": {
+                        "type": "boolean",
+                        "example": true
                     }
                 }
             },
