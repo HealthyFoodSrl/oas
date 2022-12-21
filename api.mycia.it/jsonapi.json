@@ -856,6 +856,84 @@
                     }
                 }
             }
+        },
+        "/v1/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get all users",
+                "operationId": "getUsers",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Store a user",
+                "operationId": "storeUser",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/UserRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1379,6 +1457,80 @@
                     "business_id": {
                         "type": "integer",
                         "example": 1
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "user"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Giorgio Rossi"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "giorgio@rossi.it"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393412134658"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "phone"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "UserRequest":{
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Giorgio Rossi"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "giorgio@rossi.it"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393412134658"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "phone"
+                ]
+            },
+            "UserResponse":{
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Giorgio Rossi"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "giorgio@rossi.it"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393412134658"
                     }
                 }
             },
