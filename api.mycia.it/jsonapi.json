@@ -392,6 +392,84 @@
                 }
             }
         },
+        "/v1/companies": {
+            "get": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Get all companies",
+                "operationId": "getCompanies",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Company"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Company"
+                ],
+                "summary": "Store a company",
+                "operationId": "storeCompany",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/CompanyRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/CompanyResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/guests": {
             "get": {
                 "tags": [
@@ -1187,6 +1265,122 @@
                     }
                 }
             },
+            "Company": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "company"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Il Tiglio Srl"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "iltigliosrl@email.it"
+                            },
+                            "vat": {
+                                "type": "string",
+                                "example": "IT1234567890"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393411234124"
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "sdi": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "aEi49A3"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "vat",
+                            "phone",
+                            "livemode"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "CompanyRequest": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Il Tiglio Srl"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "iltigliosrl@email.it"
+                    },
+                    "vat": {
+                        "type": "string",
+                        "example": "IT1234567890"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393411234124"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sdi": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "aEi49A3"
+                    }
+                },
+                "required": [
+                    "name",
+                    "email",
+                    "vat",
+                    "phone"
+                ]
+            },
+            "CompanyResponse": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Il Tiglio Srl"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "iltigliosrl@email.it"
+                    },
+                    "vat": {
+                        "type": "string",
+                        "example": "IT1234567890"
+                    },
+                    "phone": {
+                        "type": "string",
+                        "example": "+393411234124"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "sdi": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "aEi49A3"
+                    }
+                }
+            },
             "Guest": {
                 "type": "object",
                 "properties": {
@@ -1495,7 +1689,7 @@
                     "attributes"
                 ]
             },
-            "UserRequest":{
+            "UserRequest": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -1517,7 +1711,7 @@
                     "phone"
                 ]
             },
-            "UserResponse":{
+            "UserResponse": {
                 "type": "object",
                 "properties": {
                     "name": {
