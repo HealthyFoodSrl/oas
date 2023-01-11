@@ -1130,6 +1130,10 @@
                         "type": "string",
                         "example": "address"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1166,6 +1170,12 @@
                             "longitude",
                             "livemode"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1222,6 +1232,10 @@
                         "type": "string",
                         "example": "booking"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1254,6 +1268,12 @@
                             "status",
                             "livemode"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1331,6 +1351,10 @@
                         "type": "string",
                         "example": "business"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1377,6 +1401,12 @@
                             "livemode",
                             "is_visible"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1471,6 +1501,10 @@
                         "type": "string",
                         "example": "company"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1507,6 +1541,12 @@
                             "phone",
                             "livemode"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1587,6 +1627,10 @@
                         "type": "string",
                         "example": "guest"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1613,6 +1657,12 @@
                             "livemode",
                             "is_primary"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1670,6 +1720,10 @@
                         "type": "string",
                         "example": "line"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1681,6 +1735,12 @@
                         "required": [
                             "label"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1725,6 +1785,10 @@
                         "type": "string",
                         "example": "location"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1761,6 +1825,12 @@
                             "area_level_1",
                             "area_level_2"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1774,6 +1844,10 @@
                     "type": {
                         "type": "string",
                         "example": "network"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
                     },
                     "attributes": {
                         "type": "object",
@@ -1796,6 +1870,12 @@
                             "token",
                             "name"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1855,6 +1935,10 @@
                         "type": "string",
                         "example": "type"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1866,6 +1950,12 @@
                         "required": [
                             "label"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
@@ -1910,6 +2000,10 @@
                         "type": "string",
                         "example": "user"
                     },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
                     "attributes": {
                         "type": "object",
                         "properties": {
@@ -1931,6 +2025,12 @@
                             "email",
                             "phone"
                         ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
                     }
                 },
                 "required": [
