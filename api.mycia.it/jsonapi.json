@@ -1301,24 +1301,37 @@
             "BookingRequest": {
                 "type": "object",
                 "properties": {
-                    "reserved_at": {
+                    "type": {
                         "type": "string",
-                        "format": "date-time",
-                        "example": "2023-01-01 12:00:00"
+                        "example": "bookings"
                     },
-                    "seats": {
-                        "type": "integer",
-                        "example": 2
-                    },
-                    "note": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "Lorem ipsum dolor.."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "reserved_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-01-01 12:00:00"
+                            },
+                            "seats": {
+                                "type": "integer",
+                                "example": 2
+                            },
+                            "note": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Lorem ipsum dolor.."
+                            }
+                        },
+                        "required": [
+                            "reserved_at",
+                            "seats"
+                        ]
                     }
                 },
                 "required": [
-                    "reserved_at",
-                    "seats"
+                    "type",
+                    "attributes"
                 ]
             },
             "BookingResponse": {
@@ -1417,28 +1430,41 @@
             "BusinessRequest": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "example": "Il Tiglio"
+                        "example": "businesses"
                     },
-                    "email": {
-                        "type": "string",
-                        "example": "iltiglio@email.it"
-                    },
-                    "phone": {
-                        "type": "string",
-                        "example": "+393411234124"
-                    },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "Lorem ipsum dolor est.."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Il Tiglio"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "iltiglio@email.it"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393411234124"
+                            },
+                            "description": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Lorem ipsum dolor est.."
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "phone"
+                        ]
                     }
                 },
                 "required": [
-                    "name",
-                    "email",
-                    "phone"
+                    "type",
+                    "attributes"
                 ]
             },
             "BusinessResponse": {
@@ -1557,37 +1583,50 @@
             "CompanyRequest": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "example": "Il Tiglio Srl"
+                        "example": "companies"
                     },
-                    "email": {
-                        "type": "string",
-                        "example": "iltigliosrl@email.it"
-                    },
-                    "vat": {
-                        "type": "string",
-                        "example": "IT1234567890"
-                    },
-                    "phone": {
-                        "type": "string",
-                        "example": "+393411234124"
-                    },
-                    "livemode": {
-                        "type": "boolean",
-                        "example": true
-                    },
-                    "sdi": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "aEi49A3"
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Il Tiglio Srl"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "iltigliosrl@email.it"
+                            },
+                            "vat": {
+                                "type": "string",
+                                "example": "IT1234567890"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393411234124"
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "sdi": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "aEi49A3"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "vat",
+                            "phone"
+                        ]
                     }
                 },
                 "required": [
-                    "name",
-                    "email",
-                    "vat",
-                    "phone"
+                    "type",
+                    "attributes"
                 ]
             },
             "CompanyResponse": {
@@ -1673,23 +1712,36 @@
             "GuestRequest": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "example": "Arturo Covitti"
+                        "example": "guests"
                     },
-                    "phone": {
-                        "type": "string",
-                        "example": "+393411234124"
-                    },
-                    "is_primary": {
-                        "type": "boolean",
-                        "example": true
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Arturo Covitti"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393411234124"
+                            },
+                            "is_primary": {
+                                "type": "boolean",
+                                "example": true
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "phone",
+                            "is_primary"
+                        ]
                     }
                 },
                 "required": [
-                    "name",
-                    "phone",
-                    "is_primary"
+                    "type",
+                    "attributes"
                 ]
             },
             "GuestResponse": {
@@ -1751,13 +1803,26 @@
             "LineRequest": {
                 "type": "object",
                 "properties": {
-                    "label": {
+                    "type": {
                         "type": "string",
-                        "example": "Sushi"
+                        "example": "networks"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "example": "Sushi"
+                            }
+                        },
+                        "required": [
+                            "label"
+                        ]
                     }
                 },
                 "required": [
-                    "label"
+                    "type",
+                    "attributes"
                 ]
             },
             "LineResponse": {
@@ -1886,19 +1951,32 @@
             "NetworkRequest": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "example": "mycia"
+                        "example": "networks"
                     },
-                    "description": {
-                        "type": "string",
-                        "nullable": true,
-                        "example": "Lorem ipsum dolor.."
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "mycia"
+                            },
+                            "description": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Lorem ipsum dolor.."
+                            }
+                        },
+                        "required": [
+                            "token",
+                            "name"
+                        ]
                     }
                 },
                 "required": [
-                    "token",
-                    "name"
+                    "type",
+                    "attributes"
                 ]
             },
             "NetworkResponse": {
@@ -1966,13 +2044,26 @@
             "TypeRequest": {
                 "type": "object",
                 "properties": {
-                    "label": {
+                    "type": {
                         "type": "string",
-                        "example": "Ristorante"
+                        "example": "types"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "label": {
+                                "type": "string",
+                                "example": "Ristorante"
+                            }
+                        },
+                        "required": [
+                            "label"
+                        ]
                     }
                 },
                 "required": [
-                    "label"
+                    "type",
+                    "attributes"
                 ]
             },
             "TypeResponse": {
@@ -2041,23 +2132,36 @@
             "UserRequest": {
                 "type": "object",
                 "properties": {
-                    "name": {
+                    "type": {
                         "type": "string",
-                        "example": "Giorgio Rossi"
+                        "example": "users"
                     },
-                    "email": {
-                        "type": "string",
-                        "example": "giorgio@rossi.it"
-                    },
-                    "phone": {
-                        "type": "string",
-                        "example": "+393412134658"
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "example": "Giorgio Rossi"
+                            },
+                            "email": {
+                                "type": "string",
+                                "example": "giorgio@rossi.it"
+                            },
+                            "phone": {
+                                "type": "string",
+                                "example": "+393412134658"
+                            }
+                        },
+                        "required": [
+                            "name",
+                            "email",
+                            "phone"
+                        ]
                     }
                 },
                 "required": [
-                    "name",
-                    "email",
-                    "phone"
+                    "type",
+                    "attributes"
                 ]
             },
             "UserResponse": {
