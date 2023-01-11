@@ -16,6 +16,84 @@
         }
     ],
     "paths": {
+        "/v1/addresses": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Get all addresses",
+                "operationId": "getAddresses",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Address"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Store an address",
+                "operationId": "storeAddress",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/AddressRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/AddressResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/bookings": {
             "get": {
                 "tags": [
@@ -1016,6 +1094,98 @@
     },
     "components": {
         "schemas": {
+            "Address": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "address"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "address_line1": {
+                                "type": "string",
+                                "example": "Via Roma, 1"
+                            },
+                            "locality": {
+                                "type": "string",
+                                "example": "Milano"
+                            },
+                            "latitude": {
+                                "type": "number",
+                                "example": "45.58534"
+                            },
+                            "longitude": {
+                                "type": "number",
+                                "example": "11.39318"
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "address_line2": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Interno 4"
+                            }
+                        },
+                        "required": [
+                            "address_line1",
+                            "locality",
+                            "latitude",
+                            "longitude",
+                            "livemode"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "AddressRequest": {
+                "type": "object",
+                "properties": {
+                    "address": {
+                        "type": "string",
+                        "example": "Via Roma, 1, Milano"
+                    }
+                },
+                "required": [
+                    "address"
+                ]
+            },
+            "AddressResponse": {
+                "type": "object",
+                "properties": {
+                    "address_line1": {
+                        "type": "string",
+                        "example": "Via Roma, 1"
+                    },
+                    "locality": {
+                        "type": "string",
+                        "example": "Milano"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "example": "45.58534"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "example": "11.39318"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "address_line2": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Interno 4"
+                    }
+                }
+            },
             "Booking": {
                 "type": "object",
                 "properties": {
