@@ -755,6 +755,35 @@
                 }
             }
         },
+        "/v1/locations": {
+            "get": {
+                "tags": [
+                    "Location"
+                ],
+                "summary": "Get all locations",
+                "operationId": "getLocations",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Location"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/networks": {
             "get": {
                 "tags": [
@@ -1688,6 +1717,56 @@
                         "example": 1
                     }
                 }
+            },
+            "Location": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "location"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "country_code": {
+                                "type": "string",
+                                "example": "IT"
+                            },
+                            "postal_code": {
+                                "type": "string",
+                                "example": "20010"
+                            },
+                            "area_level_1": {
+                                "type": "string",
+                                "example": "Milano"
+                            },
+                            "area_level_2": {
+                                "type": "string",
+                                "example": "Città di Milano"
+                            },
+                            "area_level_3": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                            },
+                            "area_level_4": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": null
+                            }
+                        },
+                        "required": [
+                            "country_code",
+                            "postal_code",
+                            "area_level_1",
+                            "area_level_2"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
             },
             "Network": {
                 "type": "object",
