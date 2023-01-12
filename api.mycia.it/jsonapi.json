@@ -991,6 +991,84 @@
                 }
             }
         },
+        "/v1/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get all orders",
+                "operationId": "getOrders",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Order"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Store an order",
+                "operationId": "storeOrder",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/OrderRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/OrderResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/types": {
             "get": {
                 "tags": [
@@ -2184,6 +2262,178 @@
                     "business_id": {
                         "type": "integer",
                         "example": 1
+                    }
+                }
+            },
+            "Order": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "orders"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "area": {
+                                "type": "string",
+                                "example": "restaurant"
+                            },
+                            "status": {
+                                "type": "string",
+                                "example": "accepted"
+                            },
+                            "order_code": {
+                                "type": "string",
+                                "example": "ord_XXX"
+                            },
+                            "order_quantity": {
+                                "type": "number",
+                                "example": 2
+                            },
+                            "payed": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "customer_time_from": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "18:00:00"
+                            },
+                            "customer_datetime_from": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-01-01 18:00:00"
+                            },
+                            "tracking_code": {
+                                "type": "string",
+                                "example": "XXX"
+                            }
+                        },
+                        "required": [
+                            "area",
+                            "status",
+                            "order_code",
+                            "order_quantity",
+                            "payed",
+                            "livemode"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "OrderRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "orders"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "area": {
+                                "type": "string",
+                                "example": "restaurant"
+                            },
+                            "order_code": {
+                                "type": "string",
+                                "example": "ord_XXX"
+                            },
+                            "order_quantity": {
+                                "type": "number",
+                                "example": 2
+                            },
+                            "payed": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "customer_time_from": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "18:00:00"
+                            },
+                            "customer_datetime_from": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-01-01 18:00:00"
+                            }
+                        },
+                        "required": [
+                            "area",
+                            "order_code",
+                            "order_quantity",
+                            "payed",
+                            "livemode"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "OrderResponse": {
+                "type": "object",
+                "properties": {
+                    "area": {
+                        "type": "string",
+                        "example": "restaurant"
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "accepted"
+                    },
+                    "order_code": {
+                        "type": "string",
+                        "example": "ord_XXX"
+                    },
+                    "order_quantity": {
+                        "type": "number",
+                        "example": 2
+                    },
+                    "payed": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": true
+                    },
+                    "customer_time_from": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "18:00:00"
+                    },
+                    "customer_datetime_from": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 18:00:00"
+                    },
+                    "tracking_code": {
+                        "type": "string",
+                        "example": "XXX"
                     }
                 }
             },
