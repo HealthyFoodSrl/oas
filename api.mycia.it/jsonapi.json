@@ -317,6 +317,135 @@
                 }
             }
         },
+        "/v1/bundles": {
+            "get": {
+                "tags": [
+                    "Bundle"
+                ],
+                "summary": "Get all bundles",
+                "operationId": "getBundles",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Bundle"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Bundle"
+                ],
+                "summary": "Store a bundle",
+                "operationId": "storeBundle",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BundleRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/BundleResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/bundles/{bundle}/bindBusiness": {
+            "parameters": [
+                {
+                    "name": "bundle",
+                    "description": "The bundle id",
+                    "in": "path",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "post": {
+                "tags": [
+                    "Bundle"
+                ],
+                "summary": "Bind a business to a bundle",
+                "operationId": "bindBundleBusiness",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BundleBusinessRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/businesses": {
             "get": {
                 "tags": [
@@ -1616,6 +1745,144 @@
                     }
                 }
             },
+            "Bundle": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "bundles"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "slug": {
+                                "type": "string",
+                                "example": "prenota-ora"
+                            },
+                            "collection_method": {
+                                "type": "string",
+                                "example": "free"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Prenota Ora"
+                            },
+                            "price": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Price"
+                            },
+                            "excerpt": {
+                                "type": "string",
+                                "example": "Lorem ipsum dolor.."
+                            },
+                            "description": {
+                                "type": "string",
+                                "example": "Lorem ipsum dolor est.."
+                            }
+                        },
+                        "required": [
+                            "slug",
+                            "collection_method",
+                            "name",
+                            "price"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "BundleRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "bundles"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "slug": {
+                                "type": "string",
+                                "example": "prenota-ora"
+                            },
+                            "collection_method": {
+                                "type": "string",
+                                "example": "free"
+                            },
+                            "name": {
+                                "type": "string",
+                                "example": "Prenota Ora"
+                            },
+                            "price": {
+                                "type": "integer",
+                                "example": 1050
+                            },
+                            "excerpt": {
+                                "type": "string",
+                                "nullable": true,
+                                "example": "Lorem ipsum dolor"
+                            }
+                        },
+                        "required": [
+                            "slug",
+                            "collection_method",
+                            "name",
+                            "price"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "BundleResponse": {
+                "type": "object",
+                "properties": {
+                    "slug": {
+                        "type": "string",
+                        "example": "prenota-ora"
+                    },
+                    "collection_method": {
+                        "type": "string",
+                        "example": "free"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Prenota Ora"
+                    },
+                    "price": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Price"
+                    },
+                    "excerpt": {
+                        "type": "string",
+                        "nullable": true,
+                        "example": "Lorem ipsum dolor est"
+                    }
+                }
+            },
+            "BundleBusinessRequest": {
+                "type": "object",
+                "properties": {
+                    "business_id": {
+                        "type": "integer",
+                        "example": 1
+                    }
+                }
+            },
             "Business": {
                 "type": "object",
                 "properties": {
@@ -2434,6 +2701,23 @@
                     "tracking_code": {
                         "type": "string",
                         "example": "XXX"
+                    }
+                }
+            },
+            "Price": {
+                "type": "object",
+                "properties": {
+                    "raw": {
+                        "type": "integer",
+                        "example": 1050
+                    },
+                    "value": {
+                        "type": "number",
+                        "example": 10.5
+                    },
+                    "formatted": {
+                        "type": "string",
+                        "example": "10,50"
                     }
                 }
             },
