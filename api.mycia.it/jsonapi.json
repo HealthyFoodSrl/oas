@@ -1921,6 +1921,11 @@
                                 "type": "boolean",
                                 "example": true
                             },
+                            "business_id": {
+                                "type": "integer",
+                                "nullable": true,
+                                "example": 24
+                            },
                             "description": {
                                 "type": "string",
                                 "nullable": true,
@@ -2011,6 +2016,11 @@
                     "phone": {
                         "type": "string",
                         "example": "+393411234124"
+                    },
+                    "business_id": {
+                        "type": "integer",
+                        "nullable": true,
+                        "example": 24
                     },
                     "description": {
                         "type": "string",
