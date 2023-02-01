@@ -2090,6 +2090,11 @@
                                 "type": "boolean",
                                 "example": true
                             },
+                            "company_id": {
+                                "type": "integer",
+                                "nullable": true,
+                                "example": 1
+                            },
                             "sdi": {
                                 "type": "string",
                                 "nullable": true,
@@ -2187,6 +2192,11 @@
                     "livemode": {
                         "type": "boolean",
                         "example": true
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "nullable": true,
+                        "example": 1
                     },
                     "sdi": {
                         "type": "string",
