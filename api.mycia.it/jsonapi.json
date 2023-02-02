@@ -446,6 +446,84 @@
                 }
             }
         },
+        "/v1/bundle-subscriptions": {
+            "get": {
+                "tags": [
+                    "BundleSubscription"
+                ],
+                "summary": "Get all bundle subscriptions",
+                "operationId": "getBundleSubscriptions",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/BundleSubscription"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "BundleSubscription"
+                ],
+                "summary": "Store a bundle subscription",
+                "operationId": "storeBundleSubscription",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/BundleSubscriptionRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/BundleSubscriptionResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/businesses": {
             "get": {
                 "tags": [
@@ -1880,6 +1958,141 @@
                     "business_id": {
                         "type": "integer",
                         "example": 1
+                    }
+                }
+            },
+            "BundleSubscription": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "bundle-subscriptions"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "bundle_id": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "status": {
+                                "type": "string",
+                                "example": "created"
+                            },
+                            "livemode": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "trial_start_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-01-01 12:00:00"       
+                            },
+                            "trial_end_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2023-01-01 12:00:00"
+                            },
+                            "started_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "example":"2023-01-01 12:00:00"
+                            }
+                        },
+                        "required": [
+                            "bundle_id",
+                            "status",
+                            "livemode"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "BundleSubscriptionRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "bundle-subscriptions"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "livemode": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "trial_start_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "example":"2023-01-01 12:00:00"
+                            },
+                            "trial_end_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "example":"2023-01-01 12:00:00"
+                            },
+                            "started_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "nullable": true,
+                                "example":"2023-01-01 12:00:00"
+                            }
+                        },
+                        "required": [
+                            "livemode"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "BundleSubscriptionResponse": {
+                "type": "object",
+                "properties": {
+                    "bundle_id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "status": {
+                        "type": "string",
+                        "example": "created"
+                    },
+                    "livemode": {
+                        "type": "boolean",
+                        "example": false
+                    },
+                    "trial_start_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"       
+                    },
+                    "trial_end_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-01 12:00:00"
+                    },
+                    "started_at": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example":"2023-01-01 12:00:00"
                     }
                 }
             },
