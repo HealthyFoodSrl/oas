@@ -1276,6 +1276,84 @@
                 }
             }
         },
+        "/v1/nodes": {
+            "get": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Get all nodes",
+                "operationId": "getNodes",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Node"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Node"
+                ],
+                "summary": "Store a node",
+                "operationId": "storeNode",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/NodeRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/NodeResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/orders": {
             "get": {
                 "tags": [
@@ -2919,6 +2997,75 @@
                     "business_id": {
                         "type": "integer",
                         "example": 1
+                    }
+                }
+            },
+            "Node": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "nodes"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "livemode": {
+                                "type": "boolean",
+                                "example": false
+                            }
+                        },
+                        "required": [
+                            "livemode"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "NodeRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "nodes"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "livemode": {
+                                "type": "boolean",
+                                "example": false
+                            }
+                        },
+                        "required": [
+                            "livemode"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "NodeResponse": {
+                "type": "object",
+                "properties": {
+                    "livemode": {
+                        "type": "boolean",
+                        "example": false
                     }
                 }
             },
