@@ -1432,6 +1432,84 @@
                 }
             }
         },
+        "/v1/scopes": {
+            "get": {
+                "tags": [
+                    "Scope"
+                ],
+                "summary": "Get all scopes",
+                "operationId": "getScope",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Scope"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Scope"
+                ],
+                "summary": "Store a scope",
+                "operationId": "storeScope",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/ScopeRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/ScopeResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/types": {
             "get": {
                 "tags": [
@@ -3255,6 +3333,89 @@
                     "formatted": {
                         "type": "string",
                         "example": "10,50"
+                    }
+                }
+            },
+            "Scope": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "scopes"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "endpoint": {
+                                "type": "string",
+                                "example": "https://example.it/endpoint"
+                            },
+                            "request_count": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        },
+                        "required": [
+                            "endpoint",
+                            "request_count"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "ScopeRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "scopes"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "endpoint": {
+                                "type": "string",
+                                "example": "https://example.it/endpoint"
+                            },
+                            "request_count": {
+                                "type": "integer",
+                                "example": 1
+                            }
+                        },
+                        "required": [
+                            "endpoint",
+                            "request_count"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "ScopeResponse": {
+                "type": "object",
+                "properties": {
+                    "endpoint": {
+                        "type": "string",
+                        "example": "https://example.it/endpoint"
+                    },
+                    "request_count": {
+                        "type": "integer",
+                        "example": 1
                     }
                 }
             },
