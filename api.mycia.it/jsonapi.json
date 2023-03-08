@@ -1510,6 +1510,84 @@
                 }
             }
         },
+        "/v1/settings": {
+            "get": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Get all settings",
+                "operationId": "getSetting",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Setting"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Setting"
+                ],
+                "summary": "Store a setting",
+                "operationId": "storeSetting",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencode": {
+                            "schema": {
+                                "properties": {
+                                    "data": {
+                                        "$ref": "#/components/schemas/SettingRequest"
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/components/schemas/SettingResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EntityError"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/v1/types": {
             "get": {
                 "tags": [
@@ -3416,6 +3494,75 @@
                     "request_count": {
                         "type": "integer",
                         "example": 1
+                    }
+                }
+            },
+            "Setting": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "settings"
+                    },
+                    "id": {
+                        "type": "string",
+                        "example": "1"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "service": {
+                                "type": "string",
+                                "example": "payment"
+                            }
+                        },
+                        "required": [
+                            "service"
+                        ]
+                    },
+                    "relationships": {
+                        "type": "object"
+                    },
+                    "links": {
+                        "type": "object"
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "SettingRequest": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "example": "settings"
+                    },
+                    "attributes": {
+                        "type": "object",
+                        "properties": {
+                            "service": {
+                                "type": "string",
+                                "example": "payment"
+                            }
+                        },
+                        "required": [
+                            "service"
+                        ]
+                    }
+                },
+                "required": [
+                    "type",
+                    "attributes"
+                ]
+            },
+            "SettingResponse": {
+                "type": "object",
+                "properties": {
+                    "service": {
+                        "type": "string",
+                        "example": "payment"
                     }
                 }
             },
