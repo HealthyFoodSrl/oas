@@ -3649,7 +3649,7 @@
                 "properties": {
                     "type": {
                         "type": "string",
-                        "example": "settings"
+                        "example": "setting-items"
                     },
                     "id": {
                         "type": "string",
@@ -3684,7 +3684,7 @@
                 "properties": {
                     "type": {
                         "type": "string",
-                        "example": "settings"
+                        "example": "setting-items"
                     },
                     "attributes": {
                         "type": "object",
